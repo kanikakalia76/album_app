@@ -1,0 +1,40 @@
+<h1>NEW MYALBUM</h1>
+ 
+<%#= render 'form' %>
+ <%= form_for @myalbum, :html => { :multipart => true } do |f| %>
+
+  <p>
+    <%= f.label :Name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :DESCRIPTION %><br>
+    <%= f.text_field :description %>
+  </p>
+<p>ADD YOUR PHOTO HERE</p>
+
+  <%= f.fields_for :pictures do |d| %>
+    <%#= d.file_field :photo, multiple: true %>
+    <%= d.file_field :photo %>
+  <% end %>
+
+  <p>
+    <%= f.submit %>
+    <%# debugger %>
+  </p>
+
+<% end %>
+
+<%= link_to 'All Myalbums', myalbums_path %>
+
+<%#= form_for([@myalbum, @myalbum.pictures.build]) do |f| %>
+
+ <% @myalbum.pictures.each do |picture| %>
+
+  <td><%= image_tag picture.photo.url %></td>
+
+<%#= link_to 'Delete Picture', myalbum_picture_path(@myalbum, picture), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<% end %>
+

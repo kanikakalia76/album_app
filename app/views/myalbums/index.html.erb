@@ -1,0 +1,30 @@
+<h1>Listing Albums</h1>
+ <%= link_to 'New Album', new_myalbum_path %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @myalbum.each do |myalbum| %>
+    <tr>
+      <td><%= myalbum.name %></td>
+      <td><%= myalbum.description %></td>
+
+       <%# @myalbum.pictures.each do |img| %>
+       <% if !@pictures.blank? %>
+      <td> <%#= image_tag pictures.photo.url %></td>
+  <% @myalbum.pictures.each do |img| %>
+     <td><%= image_tag img.photo.url %></td>
+  <% end %>
+      <%end%>
+
+      <td><%= link_to 'Show', myalbum_path(myalbum) %></td>
+      <td><%= link_to 'Edit', edit_myalbum_path(myalbum) %></td>
+      <td><%= link_to 'Destroy', myalbum_path(myalbum),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+   
+    </tr>
+  <% end %>
+</table>

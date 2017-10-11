@@ -1,0 +1,21 @@
+<h1>Edit myalbum</h1>
+<%#= render 'form' %>
+<%= form_for @myalbum, :html => { :multipart => true } do |f| %>
+
+  <p>
+    <%= f.label :Name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :DESCRIPTION %><br>
+    <%= f.text_field :description %>
+  </p>
+
+ <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', myalbums_path %>

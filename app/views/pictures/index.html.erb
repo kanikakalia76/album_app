@@ -1,0 +1,15 @@
+
+<% @picture.each do |f| %>
+<%= image_tag f.photo.url %>
+
+<% end %>
+
+<%#added tag code %>
+<p>
+<%#= tag_cloud Picture.tag_counts%>
+</p>
+<p>
+<%= raw picture.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+</p>
+
+<td><%= link_to 'Back to Myalbum', myalbums_path(@myalbum) %></td>

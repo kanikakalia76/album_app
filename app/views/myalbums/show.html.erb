@@ -1,0 +1,49 @@
+
+<p>
+  <strong>NAME:</strong>
+  <%= @myalbum.name %>
+</p>
+
+<p>
+  <strong>DESCRIPTION:</strong>
+  <%= @myalbum.description %>
+</p>
+<%#= image_tag @myalbum.myalbum_photo.first.photo.url %>
+ 
+<%= link_to 'Back', myalbums_path %>
+<%= link_to 'Edit', edit_myalbum_path(@myalbum) %>
+<%= link_to 'Destroy', myalbum_path(@myalbum),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+
+
+<%#= link_to 'Add Photo to Myalbum', new_myalbum_picture_path(@myalbum) %><br />
+<%#= link_to 'Show Myalbum', myalbum_pictures_path(@myalbum) %><br />
+  <% @myalbum.pictures.each do |picture| %>
+
+  <td><%= image_tag picture.photo.url %></td>
+ <%#= link_to 'Delete Picture', 
+                         myalbum_picture_path(@myalbum, @pictures), 
+                         method: :delete,
+                         data: { confirm: 'Are you sure?' } %> 
+<%= link_to 'Delete Picture', myalbum_picture_path(@myalbum, picture), method: :delete, data: { confirm: 'Are you sure?' } %>
+Tags: <%#= myalbum_picture_path.tag_list(@myalbum, @pictures) %>
+<%= raw picture.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+
+<% end %>
+  
+<%= form_for([@myalbum, @myalbum.pictures.build]) do |f| %>
+    <p>ADD YOUR PHOTO HERE</p>
+    <p>
+      <%= f.file_field :photo %>
+    </p>
+
+    <p>
+        <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+        <%= f.text_field :tag_list %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
