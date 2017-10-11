@@ -16,7 +16,7 @@ end
   def destroy
     @myalbum = Myalbum.find(params[:myalbum_id])
     #@picture = current_user.myalbums.picture_path(params[:id])
-    @picture = @myalbum.pictures.find_by(params[:id])
+    @picture = @myalbum.pictures.find(params[:id])
     #remove_image_at_index(params[:id].to_i)
     @picture.destroy
     redirect_to myalbum_path(@myalbum)
